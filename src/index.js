@@ -22,16 +22,16 @@ class App extends React.Component {
       player2: player2,
       deck: deck,
       discard1: null,
-      discard2: null
+      discard2: null,
+      lead: player1.name,
+      follow: player2.name,
+      roundsLeft: 20
     };
-
-  firstDeal() {
+    // First deal
     for (var i=0; i<3; i++) {
       this.state.player1.hand.push(this.state.deck.pickCard());
       this.state.player2.hand.push(this.state.deck.pickCard());
     }
-  }
-
   }
 
   render() {
@@ -42,10 +42,13 @@ class App extends React.Component {
           briscolaSuit={this.state.deck.tail.suit}
           briscolaCard={this.state.deck.tail.card}
           topSuit={this.state.deck.head.suit}
-          topCard={this.state.deck.head.card} />
+          topCard={this.state.deck.head.card}
+          roundsLeft={this.state.roundsLeft} />
         <PlayingTable
           discard1={this.state.discard1}
-          discard2={this.state.discard2} />
+          discard2={this.state.discard2}
+          lead={this.state.lead}
+          follow={this.state.follow}/>
         <Player
           name={this.state.player1.name}
           hand={this.state.player1.hand.map((card) => {return card.card+' di '+card.suit})}
